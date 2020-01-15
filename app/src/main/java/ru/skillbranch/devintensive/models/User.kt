@@ -70,7 +70,7 @@ isOnline: $isOnline
         }
     }
 
-    public object Builder {
+    object Builder {
         lateinit var id: String
         var firstName: String? = null
         var lastName: String? = null
@@ -98,6 +98,10 @@ isOnline: $isOnline
 
         fun build(): User {
             return User(this)
+        }
+
+        operator fun invoke(): Builder {
+            return this
         }
     }
 }
