@@ -11,7 +11,7 @@ const val DAY = 24 * HOUR
 const val MONTH = 30 * DAY
 const val YEAR = 12 * MONTH
 
-fun Date.format(pattern: String = "HH:mm:ss dd:MM.yy"): String {
+fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
     val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
     return dateFormat.format(this)
 }
@@ -48,10 +48,10 @@ fun Date.humanizeDiff(date: Date = Date()): String {
     if (days != 0L) {
         answer = daysPhrase(days)
     }
-    val month = diffMillis / MONTH
-    if (month != 0L) {
-        answer = monthPhrase(month)
-    }
+//    val month = diffMillis / MONTH
+//    if (month != 0L) {
+//        answer = monthPhrase(month)
+//    }
     val years = diffMillis / YEAR
     if (years != 0L) {
         answer = yearPhrase(years)
@@ -156,7 +156,7 @@ enum class TimeUnits {
             val units = abs(number) % 10
             return when {
                 abs(dozens) in 5..19 -> "$number секунд"
-                abs(units) == 1L -> "1 секунду"
+                abs(units) == 1L -> "${number} секунду"
                 abs(units) in 1..4 -> "$number секунды"
                 else -> "$number секунд"
             }
@@ -168,7 +168,7 @@ enum class TimeUnits {
             val units = abs(number) % 10
             return when {
                 abs(dozens) in 5..19 -> "$number минут"
-                abs(units) == 1L -> "1 минуту"
+                abs(units) == 1L -> "${number} минуту"
                 abs(units) in 2..4 -> "$number минуты"
                 else -> "$number минут"
             }
@@ -180,7 +180,7 @@ enum class TimeUnits {
             val units = abs(number) % 10
             return when {
                 abs(dozens) in 5..19 -> "$number часов"
-                abs(units) == 1L -> "1 час"
+                abs(units) == 1L -> "${number} час"
                 abs(units) in 2..4 -> "$number часа"
                 else -> "$number часов"
             }
@@ -192,7 +192,7 @@ enum class TimeUnits {
             val units = abs(number) % 10
             return when {
                 abs(dozens) in 5..19 -> "$number дней"
-                abs(units) == 1L -> "1 день"
+                abs(units) == 1L -> "${number} день"
                 abs(units) in 2..4 -> "$number дня"
                 else -> "$number дней"
             }

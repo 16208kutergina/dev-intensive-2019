@@ -93,10 +93,13 @@ object Utils {
         return translitPhrase.toString()
     }
 
-    fun toInitials(firstName: String?, lastName: String?): String {
-        var initials = "${firstName?.first()}"
-        if (!lastName.isNullOrEmpty()) {
-            initials += "${lastName.first()}"
+    fun toInitials(firstName: String?, lastName: String?): String? {
+        var initials: String? = null
+        if (!firstName?.trim().isNullOrEmpty()) {
+            initials = "${firstName?.first()?.toTitleCase()}"
+        }
+        if (!lastName?.trim().isNullOrEmpty()) {
+            initials += "${lastName?.first()?.toTitleCase()}"
         }
         return initials
     }
