@@ -33,45 +33,45 @@ fun Date.humanizeDiff(date: Date = Date()): String {
     val diffMillis = diffDateInMillis(date)
     var answer = "только что"
     val seconds = diffMillis / SECOND
-    if (seconds != 0L) {
-        answer = secondsPhrase(seconds)
-    }
     val minutes = diffMillis / MINUTE
-    if (minutes != 0L) {
-        answer = minutesPhrase(minutes)
-    }
     val hours = diffMillis / HOUR
-    if (hours != 0L) {
-        answer = hoursPhrase(hours)
-    }
     val days = diffMillis / DAY
-    if (days != 0L) {
-        answer = daysPhrase(days)
-    }
-//    val month = diffMillis / MONTH
-//    if (month != 0L) {
-//        answer = monthPhrase(month)
-//    }
-    val years = diffMillis / YEAR
-    if (years != 0L) {
-        answer = yearPhrase(years)
-    }
+  answer = when{
+      days < -360 -> "более чем через год"
+      days > 360 -> "более года назад"
+      hours in -(360 * DAY)..-26 ||
+      hours in 26..(360 * DAY) -> daysPhrase(days)
+      hours in -26..-22 -> "через день"
+      hours in 22..26 -> "день назад"
+      minutes in -(22*MINUTE)..-75 ||
+      minutes in 75..(22*MINUTE) -> hoursPhrase(hours)
+      minutes in -75..-45 -> "через час"
+      minutes in 45..75 -> "час назад"
+      seconds in -(45 * SECOND)..-75 ||
+      seconds in 75..(45 * SECOND)-> minutesPhrase(minutes)
+      seconds in -75..-45 -> "через минуту"
+      seconds in 45..75 -> "минуту назад"
+      seconds in -45..-1 -> "через несколько секунд"
+      seconds in 1..45 -> "несколько секунд назад"
+      seconds in -1..1 -> "только что"
+      else -> "время не определено"
+  }
 
     return answer
 }
 
-fun secondsPhrase(seconds: Long): String {
-    val dozens = seconds % 100
-    val units = seconds % 10
+fun hoursPhrase(hours: Long): String {
+    val dozens = hours % 100
+    val units = hours % 10
     return when {
-        dozens in 5..19 -> "$seconds секунд назад"
-        dozens in -19..-5 -> "через ${abs(seconds)} секунд"
-        units == 1L -> "${abs(seconds)} секунду назад"
-        units in 2..4 -> "$seconds секунды назад"
-        units == -1L -> "через ${abs(seconds)} секунду"
-        units in -4..-2 -> "через ${abs(seconds)} секунды"
-        seconds < 0 -> "через ${abs(seconds)} секунд"
-        else -> "${abs(seconds)} секунд назад"
+        dozens in 5..19 -> "$hours часов назад"
+        dozens in -19..-5 -> "через ${abs(hours)} часов"
+        units == 1L -> "${abs(hours)} час назад"
+        units in 2..4 -> "$hours часа назад"
+        units == -1L -> "через ${abs(hours)} час"
+        units in -4..-2 -> "через ${abs(hours)} часа"
+        hours < 0 -> "через ${abs(hours)} часов"
+        else -> "${abs(hours)} часов назад"
     }
 }
 
@@ -90,21 +90,6 @@ fun minutesPhrase(minutes: Long): String {
     }
 }
 
-fun hoursPhrase(hours: Long): String {
-    val dozens = hours % 100
-    val units = hours % 10
-    return when {
-        dozens in 5..19 -> "$hours часов назад"
-        dozens in -19..-5 -> "через ${abs(hours)} часов"
-        units == 1L -> "${abs(hours)} час назад"
-        units in 2..4 -> "$hours часа назад"
-        units == -1L -> "через ${abs(hours)} час"
-        units in -4..-2 -> "через ${abs(hours)} часа"
-        hours < 0 -> "через ${abs(hours)} часов"
-        else -> "${abs(hours)} часов назад"
-    }
-}
-
 fun daysPhrase(days: Long): String {
     val dozens = days % 100
     val units = days % 10
@@ -120,28 +105,6 @@ fun daysPhrase(days: Long): String {
     }
 }
 
-fun monthPhrase(month: Long): String {
-    val dozens = month % 100
-    val units = month % 10
-    return when {
-        dozens in 5..19 -> "$month месяцев назад"
-        dozens in -19..-5 -> "через ${abs(month)} месяцев"
-        units == 1L -> "${abs(month)} месяц назад"
-        units in 2..4 -> "$month месяца назад"
-        units == -1L -> "через ${abs(month)} месяц"
-        units in -4..-2 -> "через ${abs(month)} месяца"
-        month < 0 -> "через ${abs(month)} месяцев"
-        else -> "${abs(month)} месяцев назад"
-    }
-}
-
-private fun yearPhrase(years: Long): String {
-    return when {
-        years >= 1L -> "более года назад"
-        years <= -1L -> "более чем через год"
-        else -> "период неизвестен"
-    }
-}
 
 private fun Date.diffDateInMillis(date: Date): Long {
     val now = date.time

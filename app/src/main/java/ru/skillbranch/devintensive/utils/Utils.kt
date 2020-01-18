@@ -94,12 +94,17 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        var initials: String? = null
-        if (!firstName?.trim().isNullOrEmpty()) {
-            initials = "${firstName?.first()?.toTitleCase()}"
+        var initials: String? = ""
+        val firstNameTrim = firstName?.trim()
+        val lastNameTrim = lastName?.trim()
+        if (!firstNameTrim.isNullOrEmpty()) {
+            initials += firstNameTrim.first().toTitleCase()
         }
-        if (!lastName?.trim().isNullOrEmpty()) {
-            initials += "${lastName?.first()?.toTitleCase()}"
+        if (!lastNameTrim.isNullOrEmpty()) {
+            initials += lastNameTrim.first().toTitleCase()
+        }
+        if (initials.isNullOrEmpty()) {
+            initials = null
         }
         return initials
     }
