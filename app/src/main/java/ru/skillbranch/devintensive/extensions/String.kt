@@ -1,6 +1,5 @@
 package ru.skillbranch.devintensive.extensions
 
-import android.text.Html
 import org.jsoup.Jsoup
 
 
