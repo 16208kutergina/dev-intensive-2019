@@ -9,6 +9,7 @@ fun String.truncate(count: Int = 16): String {
     return "$substring..."
 }
 
-//fun String.stripHtml() : String{
-//    //return Jsoup.parse( this ).text()
-//}
+fun String.stripHtml() : String{
+    return "ok"
+    //return Jsoup.parse( this ).text()
+}
