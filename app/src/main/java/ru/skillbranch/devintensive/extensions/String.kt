@@ -1,6 +1,5 @@
 package ru.skillbranch.devintensive.extensions
 
-import org.jsoup.Jsoup
 
 
 fun String.truncate(count: Int = 16): String {
@@ -10,6 +9,6 @@ fun String.truncate(count: Int = 16): String {
     return "$substring..."
 }
 
-fun String.stripHtml() : String{
-    return Jsoup.parse( this ).text()
-}
+//fun String.stripHtml() : String{
+//    //return Jsoup.parse( this ).text()
+//}
