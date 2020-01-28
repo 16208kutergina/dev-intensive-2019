@@ -13,9 +13,9 @@ fun Activity.hideKeyboard(){
 
 fun Activity.isKeyboardOpen(): Boolean{
     val rect = Rect()
-    getWindow().getDecorView().getWindowVisibleDisplayFrame(rect)
-    val screenHeight: Int = getWindowManager().getDefaultDisplay().getHeight()
-    val diff: Int = screenHeight - - (rect.bottom - rect.top)
+    window.decorView.getWindowVisibleDisplayFrame(rect)
+    val display = this.resources.displayMetrics
+    val diff: Int = display.heightPixels - (rect.bottom - rect.top)
     return diff > 100
 }
 
