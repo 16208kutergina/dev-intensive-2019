@@ -1,6 +1,5 @@
 package ru.skillbranch.devintensive.models
 
-import android.util.Log
 import androidx.core.text.isDigitsOnly
 
 class Bender(
@@ -47,8 +46,8 @@ class Bender(
             "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
         } else {
             status = status.nextStatus()
-            "Это неправильный ответ \n" +
-                    " ${question.question}" to status.color
+            "Это неправильный ответ\n" +
+                    "${question.question}" to status.color
         }
     }
 
@@ -88,7 +87,7 @@ class Bender(
         NAME("Как меня зовут?", listOf("бендер", "bender")) {
             override fun nextQuestion(): Question = PROFESSION
         },
-        PROFESSION("Назови мою провессию?", listOf("сгибальщик", "bender")) {
+        PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
             override fun nextQuestion(): Question = MATERIALS
         },
         MATERIALS("Из чего я сделан?", listOf("металл", "дерево", "metal", "iron", "wood")) {

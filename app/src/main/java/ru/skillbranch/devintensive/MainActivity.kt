@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         val status = savedInstanceState?.getString("STATUS") ?: Bender.Status.NORMAL.name
         val question = savedInstanceState?.getString("QUESTION") ?: Bender.Question.NAME.name
-        val inputText = savedInstanceState?.getString("INPUTTEXT") ?: ""
+        val inputText = savedInstanceState?.getString("INPUT_TEXT") ?: ""
         Log.d("M_MainActivity", question)
         messageEt.setText(inputText)
         benderObj = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question))
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onSaveInstanceState(outState)
         outState.putString("STATUS", benderObj.status.name)
         outState.putString("QUESTION", benderObj.question.name)
-        outState.putString("INPUTTEXT", messageEt.text.toString())
+        outState.putString("INPUT_TEXT", messageEt.text.toString())
         Log.d(
             "M_MainActivity",
             "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.question}"
