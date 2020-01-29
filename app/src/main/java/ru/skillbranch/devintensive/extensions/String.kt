@@ -1,7 +1,5 @@
 package ru.skillbranch.devintensive.extensions
 
-import org.jsoup.Jsoup
-
 
 fun String.truncate(count: Int = 16): String {
     val trim = this.trim()
@@ -11,5 +9,9 @@ fun String.truncate(count: Int = 16): String {
 }
 
 fun String.stripHtml() : String{
-    return Jsoup.parse( this ).text()
+    val text = this.trim()
+    val patternSpace = ("\\s+").toRegex()
+    val patternTag = ("<[^>]*>").toRegex()
+    val patternOut = ("[&'\"]").toRegex()
+    return text.replace(patternSpace," ").replace(patternTag, "").replace(patternOut, "")
 }
