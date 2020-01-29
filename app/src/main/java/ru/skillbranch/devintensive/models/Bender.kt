@@ -18,7 +18,7 @@ class Bender(
     }
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
-        val aboutValidAnswer = isValidAnswer(answer)
+        val aboutValidAnswer = checkValidAnswer(answer)
         val answerToLowerCase = answer.toLowerCase()
         val pair = if (aboutValidAnswer != "OK") {
             notValidAnswer(aboutValidAnswer)
@@ -51,13 +51,13 @@ class Bender(
         }
     }
 
-    private fun isValidAnswer(answer: String): String {
+    private fun checkValidAnswer(answer: String): String {
         return when {
             (question == Question.NAME) && answer[0].isLowerCase() ->
                 "Имя должно начинаться с заглавной буквы"
             (question == Question.PROFESSION) && answer[0].isUpperCase() ->
                 "Профессия должна начинаться со строчной буквы"
-            (question == Question.MATERIALS) && answer.matches(Regex("[0-9]")) ->
+            (question == Question.MATERIALS) && answer.contains(Regex("\\d")) ->
                 "Материал не должен содержать цифр"
             (question == Question.BDAY) && !answer.isDigitsOnly() ->
                 "Год моего рождения должен содержать только цифры"
