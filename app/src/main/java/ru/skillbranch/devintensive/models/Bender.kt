@@ -93,10 +93,10 @@ class Bender(
         MATERIALS("Из чего я сделан?", listOf("металл", "дерево", "metal", "iron", "wood")) {
             override fun nextQuestion(): Question = BDAY
         },
-        BDAY("Когда меня создали", listOf("2993")) {
+        BDAY("Когда меня создали?", listOf("2993")) {
             override fun nextQuestion(): Question = SERIAL
         },
-        SERIAL("Мой серийный номер", listOf("2716057")) {
+        SERIAL("Мой серийный номер?", listOf("2716057")) {
             override fun nextQuestion(): Question = IDLE
         },
         IDLE("Отлично - ты справился\nНа этом все, вопросов больше нет", listOf()) {
