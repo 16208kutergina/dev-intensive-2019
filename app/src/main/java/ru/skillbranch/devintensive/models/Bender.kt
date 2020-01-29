@@ -99,7 +99,7 @@ class Bender(
         SERIAL("Мой серийный номер?", listOf("2716057")) {
             override fun nextQuestion(): Question = IDLE
         },
-        IDLE("Отлично - ты справился\nНа этом все, вопросов больше нет", listOf()) {
+        IDLE("На этом все, вопросов больше нет", listOf()) {
             override fun nextQuestion(): Question = IDLE
         };
 
