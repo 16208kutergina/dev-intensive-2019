@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         outState.putString("INPUT_TEXT", messageEt.text.toString())
         Log.d(
             "M_MainActivity",
-            "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.question}"
+            "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.question} ${messageEt.text}"
         )
     }
 
